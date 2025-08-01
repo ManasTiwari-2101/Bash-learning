@@ -128,6 +128,103 @@ case "$variable" in
   *) default ;;
 esac
 ```
+Great question — and the answer is:
+
+> 🔴 **No**, Bash `case` statements do **not have fall-through** by default.
+
+---
+
+## 🧠 What does that mean?
+
+In languages like C or Java:
+
+```c
+switch (x) {
+  case 1:
+    // code
+  case 2:
+    // code (falls through from case 1)
+}
+```
+
+Unless you write `break`, it continues to the next case.
+
+-------------------------------------------------------------------------------------------------
+
+## ✅ In **Bash**, **each pattern block ends with `;;`**, which **stops execution** of the `case`.
+
+### 🧪 Example:
+
+```bash
+case "$x" in
+  1)
+    echo "One"
+    ;;
+  2)
+    echo "Two"
+    ;;
+esac
+```
+
+* If `x=1`, only `"One"` is printed
+* It will **not** fall into case `2`
+
+---
+
+## 🟡 Can you simulate fall-through in Bash?
+
+Yes — but only **manually**, like this:
+
+```bash
+case "$x" in
+  1)
+    echo "One"
+    ;&
+  2)
+    echo "Two"
+    ;;
+esac
+```
+
+### 🔍 What is `;&`?
+
+* `;&` tells Bash to **also run the next pattern**, even if it doesn’t match.
+
+📌 This only works in **Bash 4.0 or later**.
+
+---
+
+### 🧪 Example:
+
+```bash
+x=1
+case "$x" in
+  1)
+    echo "You chose 1"
+    ;&
+  2)
+    echo "Also matched 2"
+    ;;
+esac
+```
+
+Output:
+
+```
+You chose 1
+Also matched 2
+```
+
+---
+
+## ✅ Summary:
+
+| Symbol | Behavior                                   |
+| ------ | ------------------------------------------ |
+| `;;`   | End this case — no fall-through            |
+| `;&`   | Fall through to next block (run it too)    |
+| `;;&`  | Test next pattern as well (advanced, rare) |
+
 
 #### Key Notes:
 
@@ -220,5 +317,4 @@ random_number=$(( RANDOM % 10 + 1 ))
 | Loops (while)  | `while [ cond ]; do ...`       |
 | Loops (until)  | `until [ cond ]; do ...`       |
 | Random         | `$RANDOM`, `$(( RANDOM % n ))` |
-
 --------------------------------------------------------------------------------------------------------
