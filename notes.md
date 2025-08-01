@@ -128,8 +128,6 @@ case "$variable" in
   *) default ;;
 esac
 ```
-Great question — and the answer is:
-
 > 🔴 **No**, Bash `case` statements do **not have fall-through** by default.
 
 ---
