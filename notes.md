@@ -316,3 +316,144 @@ random_number=$(( RANDOM % 10 + 1 ))
 | Loops (until)  | `until [ cond ]; do ...`       |
 | Random         | `$RANDOM`, `$(( RANDOM % n ))` |
 --------------------------------------------------------------------------------------------------------
+You're right — thanks for the reminder. Here's the **clean `notes.md`** for **Step 5: Functions in Bash**, with theory, syntax, key concepts, and small tips — **no programs included**, so it's ready for GitHub as a standalone notes file.
+
+---
+
+## 📘 Functions (Step 5)
+
+# 🧠 Bash Scripting – Step 5: Functions
+
+Functions in Bash are reusable blocks of code. They help organize logic, reduce repetition, and make scripts cleaner and easier to manage.
+
+---
+
+## ✅ 1. Defining a Function
+
+There are two valid syntaxes:
+
+```bash
+my_function() {
+    commands
+}
+````
+
+Or:
+
+```bash
+function my_function {
+    commands
+}
+```
+
+---
+
+## ✅ 2. Calling a Function
+
+Once defined, call the function by its name:
+
+```bash
+my_function
+```
+
+---
+
+## ✅ 3. Passing Arguments to Functions
+
+Arguments are passed like this:
+
+```bash
+greet_user "Manas"
+```
+
+Inside the function:
+
+* `$1` = first argument
+* `$2`, `$3`, ... = second, third, etc.
+
+There is no need to declare parameters explicitly.
+
+---
+
+## ✅ 4. Returning Values from Functions
+
+### 🔸 String or number values (indirect return):
+
+Use `echo` to output the value, and capture it using command substitution:
+
+```bash
+get_value() {
+    echo "42"
+}
+
+value=$(get_value)
+```
+
+### 🔸 Exit status (true/false logic):
+
+Use `return` with an integer (0 = success, non-zero = failure):
+
+```bash
+check_even() {
+    if (( $1 % 2 == 0 )); then
+        return 0
+    else
+        return 1
+    fi
+}
+```
+
+Then use `$?` to check:
+
+```bash
+check_even 4
+if [ $? -eq 0 ]; then
+    echo "Even"
+else
+    echo "Odd"
+fi
+```
+
+---
+
+## ✅ 5. Local Variables
+
+To limit variable scope to inside the function, use `local`:
+
+```bash
+example() {
+    local temp="value"
+    echo "$temp"
+}
+```
+
+Using `local` prevents accidental changes to variables outside the function.
+
+---
+
+## ✅ 6. Special Variables Inside Functions
+
+| Variable      | Meaning                                      |
+| ------------- | -------------------------------------------- |
+| `$1`, `$2`... | Positional parameters passed to the function |
+| `$#`          | Number of arguments                          |
+| `$@`          | All arguments as separate words              |
+| `$*`          | All arguments as one string                  |
+| `$?`          | Exit code of the last command                |
+
+---
+
+## 📌 Summary: Key Function Practices
+
+| Feature       | Tool                        |
+| ------------- | --------------------------- |
+| Define        | `function_name() { ... }`   |
+| Call          | `function_name`             |
+| Pass values   | `$1`, `$2`, etc.            |
+| Return string | `echo` + `$(function)`      |
+| Return status | `return` + check with `$?`  |
+| Limit scope   | Use `local` inside function |
+
+```
+
+--------------------------------------------------------------------------------------------
