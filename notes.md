@@ -454,12 +454,8 @@ Using `local` prevents accidental changes to variables outside the function.
 | Return status | `return` + check with `$?`  |
 | Limit scope   | Use `local` inside function |
 
-```
-
---------------------------------------------------------------------------------------------
+``
 # Step 6 - File Handling
-
-----
 
 ## 🧠 What is File Handling in Bash?
 
@@ -497,15 +493,11 @@ Most real-world scripts do things like:
 | Move/rename            | `mv old new`                   |
 | Delete                 | `rm file`                      |
 | Count lines/words      | `wc -l`, `wc -w`               |
+-------
 
----
----
-
-## 🔍 Step 6.1: Checking If a File or Directory Exists
+# 🔍 Step 6.1: Checking If a File or Directory Exists
 
 In Bash, we use **test expressions** (inside `[ ]`) to check if a file or directory is there.
-
----
 
 ### ✅ 1. Check if a **file** exists:
 
