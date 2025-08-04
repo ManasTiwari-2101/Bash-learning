@@ -781,3 +781,77 @@ mv -i /home/manas/newfile.txt /home/manas/Desktop/
 This will ask you before overwriting anything.
 
 ---
+Great! You're now entering:
+
+---
+
+### 🟡 **Counting Words, Lines, and Characters in Bash**
+
+This step will help you understand basic file analysis — useful for log parsing, statistics, automation, etc.
+
+---
+
+### 🔧 Key Command: `wc`
+
+The `wc` (word count) command is built-in and helps with:
+
+| Option | Description                |
+| ------ | -------------------------- |
+| `-l`   | Count number of lines      |
+| `-w`   | Count number of words      |
+| `-c`   | Count number of bytes      |
+| `-m`   | Count number of characters |
+
+---
+
+### ✅ Example Use:
+
+```bash
+wc -l filename.txt     # Count lines
+wc -w filename.txt     # Count words
+wc -m filename.txt     # Count characters
+wc filename.txt        # All stats
+```
+
+---
+
+### 🧠 Did You Know?
+
+* `wc -c` shows **bytes**, not characters. For multibyte text (like Unicode), use `-m`.
+* You can combine flags like `wc -lw`.
+
+---
+
+Assume your file is called `sample.txt` (replace with your actual filename).
+
+```bash
+wc sample.txt
+```
+
+This will print:
+
+```
+<number_of_lines> <number_of_words> <number_of_bytes> sample.txt
+```
+
+Now, try the following separately:
+
+```bash
+wc -l sample.txt    # Only lines
+wc -w sample.txt    # Only words
+wc -m sample.txt    # Only characters
+wc -c sample.txt    # Only bytes
+```
+
+---
+
+### 🔍 Tip
+
+If your file has Unicode characters (like emojis, Devanagari, etc.), try:
+
+```bash
+wc -m sample.txt    # for accurate character count
+```
+
+---
+
