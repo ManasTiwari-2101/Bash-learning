@@ -853,5 +853,5 @@ If your file has Unicode characters (like emojis, Devanagari, etc.), try:
 wc -m sample.txt    # for accurate character count
 ```
 
----
+------
 
